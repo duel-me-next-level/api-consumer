@@ -1,22 +1,40 @@
 package message
 
-// SendMQTTMessage sends a message over the MQTT protocol
-func SendMQTTMessage(topic string, message []byte) error {
-	// Connect to the MQTT broker
-	client, err := mqtt.NewClient(mqtt.ClientOptions{
-		// Options go here
+import (
+	"context"
+
+	"github.com/segmentio/kafka-go"
+	"google.golang.org/grpc"
+)
+
+// SendGRPCMessage sends a message over GRPC
+func SendGRPCMessage(conn *grpc.ClientConn, topic string, message *kafka.Message) error {
+	// Create a new client for the GRPC service
+	client := NewGRPCClient(conn)
+
+	// Send the message to the specified topic
+	_, err := client.SendMessage(context.Background(), &GRPCMessage{
+		Topic:   topic,
+		Message: message,
 	})
 	if err != nil {
 		return err
 	}
-	defer client.Disconnect()
 
-	// Publish the message to the specified topic
-	token := client.Publish(topic, 0, false, message)
-	token.Wait()
-	if token.Error() != nil {
-		return token.Error()
+	return nil
+}
+
+// SendKafkaMessage sends a message over Kafka
+func SendKafkaMessage(writer *kafka.Writer, topic string, message []byte) error {
+	// Write the message to the specified topic
+	err := writer.WriteMessages(context.Background(),
+		kafka.Message{
+			Value: message,
+			Topic: topic,
+		},
+	)
+	if err != nil {
+		return err
 	}
-
 	return nil
 }

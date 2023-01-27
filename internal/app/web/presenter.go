@@ -3,7 +3,7 @@ package presenter
 import (
 	"encoding/json"
 
-	"github.com/you/yourproject/internal/app/adapter/model"
+	"github.com/duel-me-next-level/api-consumer/internal/app/adapter/model"
 )
 
 // FormatMatchDataAsJSON formats match data as JSON
