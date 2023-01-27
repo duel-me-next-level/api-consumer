@@ -29,7 +29,6 @@ GET /tournament/{id}/matches
 Get all available games
 ```
 GET /games
-```
 ###   Configuration
 Before using the microservice, you will need to configure the API key to access the third-party API. This can be done by editing the **config.yml** file and inserting your API key in the **api_key** property.
 
