@@ -1,4 +1,4 @@
-package infra
+package request
 
 import (
 	"io/ioutil"
