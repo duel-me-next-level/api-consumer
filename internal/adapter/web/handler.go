@@ -3,8 +3,8 @@ package web
 import (
 	"net/http"
 
-	"github.com/you/yourproject/internal/app/adapter/repository"
-	"github.com/you/yourproject/internal/app/web/presenter"
+	"github.com/duel-me-next-level/api-consumer/internal/app/adapter/repository"
+	"github.com/duel-me-next-level/api-consumer/internal/app/web/presenter"
 )
 
 // MatchDataHandler handles HTTP requests for match data
