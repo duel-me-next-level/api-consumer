@@ -1,7 +1,8 @@
-package repository
+package postgres
 
 import (
 	"github.com/duel-me-next-level/api-consumer/app/adapter/model"
+	"github.com/duel-me-next-level/api-consumer/internal/app/adapter/model"
 	"github.com/duel-me-next-level/api-consumer/internal/infra/database"
 )
 
@@ -11,7 +12,7 @@ type Repository struct {
 }
 
 // SaveMatchData saves match data to the database
-func (r *Repository) SaveMatchData(matchData *model.MatchData) error {
+func (r *Repository) SaveMatchData(matchData *model.MatchDataDTOInput) error {
 	// Prepare the SQL statement
 	stmt, err := r.DB.Prepare("INSERT INTO matches (id, match_date, home_team, away_team, home_score, away_score) VALUES ($1, $2, $3, $4, $5, $6)")
 	if err != nil {
@@ -29,7 +30,7 @@ func (r *Repository) SaveMatchData(matchData *model.MatchData) error {
 }
 
 // GetMatchData retrieves match data from the database
-func (r *Repository) GetMatchData(id string) (*model.MatchData, error) {
+func (r *Repository) GetMatchData(id string) (*model.MatchDataDTOOutput, error) {
 	// Prepare the SQL statement
 	stmt, err := r.DB.Prepare("SELECT id, match_date, home_team, away_team, home_score, away_score FROM matches WHERE id = $1")
 	if err != nil {
