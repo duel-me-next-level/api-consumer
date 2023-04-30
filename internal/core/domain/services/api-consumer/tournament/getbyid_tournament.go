@@ -1,18 +1,23 @@
-package tournament
+package service
+
+import (
+	"github.com/duel-me-next-level/api-consumer/internal/core/domain/model"
+	repository "github.com/duel-me-next-level/api-consumer/internal/core/domain/ports"
+)
 
 type GetTournamentByIDInputDto struct {
-	ID int `json:"id"`
+	ID int32 `json:"id"`
 }
 
 type GetTournamentByIDOutputDto struct {
-	Tournament *Tournament
+	Tournament *model.Tournament
 }
 
 type GetTournamentByIDUseCase struct {
-	TournamentRepository TournamentRepository
+	TournamentRepository repository.TournamentRepository
 }
 
-func NewGetTournamentByIDUseCase(tournamentRepository TournamentRepository) *GetTournamentByIDUseCase {
+func NewGetTournamentByIDUseCase(tournamentRepository repository.TournamentRepository) *GetTournamentByIDUseCase {
 	return &GetTournamentByIDUseCase{TournamentRepository: tournamentRepository}
 }
 
