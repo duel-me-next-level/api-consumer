@@ -1,4 +1,4 @@
-package domain
+package model
 
 type League struct {
 	LeagueID      string

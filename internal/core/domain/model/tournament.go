@@ -1,17 +1,17 @@
-package domain
+package model
 
 import (
 	"errors"
 	"time"
 
-	domain "github.com/duel-me-next-level/api-consumer/internal/core/domain/model/league"
+	"github.com/duel-me-next-level/api-consumer/internal/core/domain/model"
 )
 
 type Tournament struct {
 	BeginAt       time.Time
 	EndAt         time.Time
 	ID            int32
-	League        *domain.League
+	League        *model.League
 	VideoGameID   int32
 	videoGameName string
 	winnerID      int32
