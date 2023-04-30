@@ -3,22 +3,20 @@ package model
 import (
 	"errors"
 	"time"
-
-	"github.com/duel-me-next-level/api-consumer/internal/core/domain/model"
 )
 
 type Tournament struct {
 	BeginAt       time.Time
 	EndAt         time.Time
 	ID            int32
-	League        *model.League
+	League        *League
 	VideoGameID   int32
 	videoGameName string
 	winnerID      int32
 	winnerType    string
 }
 
-func NewTournament(beginAt time.Time, endAt time.Time, id int32, league domain.League, videoGameID int32, winnerId int32, winnerType string) *Tournament {
+func NewTournament(beginAt time.Time, endAt time.Time, id int32, league League, videoGameID int32, winnerId int32, winnerType string) *Tournament {
 
 	videoGameName, err := getVideoGameName(videoGameID)
 	if err != nil {
@@ -29,7 +27,7 @@ func NewTournament(beginAt time.Time, endAt time.Time, id int32, league domain.L
 		BeginAt:       beginAt,
 		EndAt:         endAt,
 		ID:            id,
-		League:        domain.NewLeague(league.LeagueID, league.LiveSupported),
+		League:        NewLeague(league.LeagueID, league.LiveSupported),
 		VideoGameID:   videoGameID,
 		videoGameName: videoGameName,
 		winnerID:      winnerId,
