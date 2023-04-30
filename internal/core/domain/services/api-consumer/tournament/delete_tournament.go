@@ -1,24 +1,23 @@
-package tournament
+package service
+
+import repository "github.com/duel-me-next-level/api-consumer/internal/core/domain/ports"
 
 type DeleteTournamentInputDto struct {
-	ID int
-}
-
-type DeleteTournamentOutputDto struct {
+	ID int32
 }
 
 type DeleteTournamentUseCase struct {
-	TournamentRepository domain.TournamentRepository
+	TournamentRepository repository.TournamentRepository
 }
 
-func NewDeleteTournamentUseCase(tournamentRepository domain.TournamentRepository) *DeleteTournamentUseCase {
+func NewDeleteTournamentUseCase(tournamentRepository repository.TournamentRepository) *DeleteTournamentUseCase {
 	return &DeleteTournamentUseCase{TournamentRepository: tournamentRepository}
 }
 
-func (u *DeleteTournamentUseCase) Execute(input DeleteTournamentInputDto) (*DeleteTournamentOutputDto, error) {
+func (u *DeleteTournamentUseCase) Execute(input DeleteTournamentInputDto) error {
 	err := u.TournamentRepository.Delete(input.ID)
 	if err != nil {
-		return nil, err
+		return err
 	}
-	return &DeleteTournamentOutputDto{}, nil
+	return nil
 }

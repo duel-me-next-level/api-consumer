@@ -3,11 +3,11 @@ package web
 import (
 	"encoding/json"
 
-	"github.com/duel-me-next-level/api-consumer/internal/app/adapter/model"
+	service "github.com/duel-me-next-level/api-consumer/internal/core/domain/services/api-consumer/tournament"
 )
 
 // FormatMatchDataAsJSON formats match data as JSON
-func FormatMatchDataAsJSON(matchData *model.MatchDataDTOOutput) ([]byte, error) {
+func FormatMatchDataAsJSON(matchData *service.CreateTournamentOutputDto) ([]byte, error) {
 	matchDataJSON, err := json.Marshal(matchData)
 	if err != nil {
 		return nil, err

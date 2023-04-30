@@ -1,13 +1,18 @@
 package main
 
+import (
+	"github.com/gin-gonic/gin"
+)
+
 func main() {
-	tournamentRepository := gamesrepo.NewMemKVS()
-	gamesService := gamesrv.New(gamesRepository, uidgen.New())
-	gamesHandler := gamehdl.NewHTTPHandler(gamesService)
+
+	/* tournamentRepository := repository.NewTournamentRepository()
+	tournamentService := gamesrv.New(tournamentRepository) */
+	/* gamesHandler := gamehdl.NewHTTPHandler(gamesService) */
 
 	router := gin.New()
-	router.GET("/games/:id", gamesHandler.Get)
-	router.POST("/games", gamesHandler.Create)
+	/* router.GET("/tournament/:id", gamesHandler.Get)
+	router.POST("/games", gamesHandler.Create) */
 
 	router.Run(":8080")
 }

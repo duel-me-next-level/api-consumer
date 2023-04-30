@@ -1,43 +1,44 @@
-package tournament
+package service
 
-import "time"
+import (
+	"time"
+
+	"github.com/duel-me-next-level/api-consumer/internal/core/domain/model"
+	repository "github.com/duel-me-next-level/api-consumer/internal/core/domain/ports"
+)
 
 type UpdateTournamentInputDto struct {
-	ID      int       `json:"id"`
-	BeginAt time.Time `json:"beginAt"`
-	EndAt   time.Time `json:"endAt"`
-	League  int       `json:"league"`
+	ID      int32         `json:"id"`
+	BeginAt time.Time     `json:"beginAt"`
+	EndAt   time.Time     `json:"endAt"`
+	League  *model.League `json:"league"`
 }
 
 type UpdateTournamentOutputDto struct {
-	ID      int
+	ID      int32
 	BeginAt time.Time
 	EndAt   time.Time
-	League  *League
+	League  *model.League
 }
 
 type UpdateTournamentUseCase struct {
-	TournamentRepository TournamentRepository
-	LeagueRepository     LeagueRepository
+	TournamentRepository repository.TournamentRepository
+	LeagueRepository     repository.LeagueRepository
 }
 
-func NewUpdateTournamentUseCase(tournamentRepository TournamentRepository, leagueRepository LeagueRepository) *UpdateTournamentUseCase {
+func NewUpdateTournamentUseCase(tournamentRepository repository.TournamentRepository, leagueRepository repository.LeagueRepository) *UpdateTournamentUseCase {
 	return &UpdateTournamentUseCase{TournamentRepository: tournamentRepository, LeagueRepository: leagueRepository}
 }
 
 func (u *UpdateTournamentUseCase) Execute(input UpdateTournamentInputDto) (*UpdateTournamentOutputDto, error) {
-	league, err := u.LeagueRepository.GetByID(input.League)
-	if err != nil {
-		return nil, err
-	}
 	tournament, err := u.TournamentRepository.GetByID(input.ID)
 	if err != nil {
 		return nil, err
 	}
 	tournament.BeginAt = input.BeginAt
 	tournament.EndAt = input.EndAt
-	tournament.League = league
-	err = u.TournamentRepository.Update
+	tournament.League = input.League
+	err = u.TournamentRepository.Update(tournament)
 	if err != nil {
 		return nil, err
 	}

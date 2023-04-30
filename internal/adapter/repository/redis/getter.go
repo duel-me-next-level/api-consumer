@@ -1,4 +1,6 @@
-package main
+package redis
+
+/* package main
 
 import (
 	"fmt"
@@ -21,3 +23,4 @@ func getter() {
 
 	// Output: match id: 1
 }
+*/
