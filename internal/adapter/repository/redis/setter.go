@@ -1,9 +1,11 @@
-package main
+package redis
+
+/* package main
 
 import (
 	"fmt"
 
-	"github.com/duel-me-next-level/api-consumer/app/domain/model/match"
+	"github.com/duel-me-next-level/api-consumer/app/domain/model"
 	"github.com/go-redis/redis"
 )
 
@@ -35,3 +37,4 @@ func setter() {
 
 	// Output: match saved
 }
+*/

@@ -1,6 +1,6 @@
 package web
 
-import "github.com/gin-gonic/gin"
+/* import "github.com/gin-gonic/gin"
 
 type HTTPHandler struct {
 	gamesService ports.GamesService
@@ -20,4 +20,4 @@ func (hdl *HTTPHandler) Get(c *gin.Context) {
 	}
 
 	c.JSON(200, game)
-}
+} */
